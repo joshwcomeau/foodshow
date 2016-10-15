@@ -8,7 +8,7 @@ import { fetchPhotosRequest } from '../../actions';
 
 const styles = StyleSheet.create({
   gallery: {
-    padding: '100px',
+    padding: '80px 100px',
   },
   galleryImageContainer: {
     marginBottom: '50px',

@@ -2,7 +2,8 @@ import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
 import { sidebarWidth, grey100, grey900 } from '../../style-variables';
-
+import Logo from '../Logo';
+import Divider from '../Divider';
 
 const styles = StyleSheet.create({
   sidebar: {
@@ -14,12 +15,34 @@ const styles = StyleSheet.create({
     color: grey100,
     background: grey900,
   },
+
+  hamburger: {
+    width: '50px',
+  },
+
+  header: {
+    padding: '50px 0',
+    textAlign: 'center',
+  },
+
+  subtitle: {
+    margin: '30px 60px',
+    fontSize: '13px',
+    // fontFamily: 'Trirong',
+  },
 });
 
 const Sidebar = () => {
   return (
     <div className={css(styles.sidebar)}>
-      <h1>I am a sidebar!</h1>
+      <header className={css(styles.header)}>
+        <Logo />
+        <p className={css(styles.subtitle)}>
+          For those times in life when you just feel like looking at pictures of hamburgers.
+        </p>
+      </header>
+
+      <Divider />
     </div>
   );
 };
