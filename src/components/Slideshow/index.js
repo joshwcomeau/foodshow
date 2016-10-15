@@ -7,13 +7,13 @@ import { fetchPhotosRequest } from '../../actions';
 
 
 const styles = StyleSheet.create({
-  gallery: {
+  slideshow: {
     padding: '80px 100px',
   },
-  galleryImageContainer: {
+  slideshowImageContainer: {
     marginBottom: '50px',
   },
-  galleryImage: {
+  slideshowImage: {
     display: 'block',
     width: '100%',
     borderRadius: 10,
@@ -21,18 +21,19 @@ const styles = StyleSheet.create({
   },
 });
 
-class Gallery extends Component {
+class Slideshow extends Component {
   componentDidMount() {
+    // Fetch info for all the items in our slideshow, right away.
     this.props.fetchPhotosRequest();
   }
 
   renderPhotos() {
     return this.props.photos.map(photo => (
-      <div className={css(styles.galleryImageContainer)}>
+      <div className={css(styles.slideshowImageContainer)}>
         <img
           key={photo.id}
           src={photo.urls.regular}
-          className={css(styles.galleryImage)}
+          className={css(styles.slideshowImage)}
           alt="Hamburger from Unsplash"
         />
       </div>
@@ -41,14 +42,14 @@ class Gallery extends Component {
 
   render() {
     return (
-      <div className={css(styles.gallery)}>
+      <div className={css(styles.slideshow)}>
         {this.renderPhotos()}
       </div>
     );
   }
 }
 
-Gallery.propTypes = {
+Slideshow.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     urls: PropTypes.shape({
@@ -62,4 +63,4 @@ const mapStateToProps = state => ({
   photos: photosListSelector(state),
 });
 
-export default connect(mapStateToProps, { fetchPhotosRequest })(Gallery);
+export default connect(mapStateToProps, { fetchPhotosRequest })(Slideshow);

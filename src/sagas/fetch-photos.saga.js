@@ -9,6 +9,7 @@ import {
   FETCH_PHOTOS_REQUEST,
   fetchPhotosSuccess,
   fetchPhotosFailure,
+  selectPhoto,
 } from '../actions';
 
 
@@ -18,9 +19,12 @@ function* fetchPhotos({ page }) {
 
     // Normalize the response
     const { result: photoIds, entities } = normalize(response, arrayOf(photoSchema));
-    const { photos, user, categories } = entities;
+    const { photos, users } = entities;
 
-    yield put(fetchPhotosSuccess({ photos, photoIds }));
+    yield put(fetchPhotosSuccess({ photos, photoIds, users }));
+
+    // Select the first photo by default.
+    yield put(selectPhoto({ photoId: photoIds[0] }));
   } catch (error) {
     yield put(fetchPhotosFailure({ error }));
   }

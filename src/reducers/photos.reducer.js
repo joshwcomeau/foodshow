@@ -5,12 +5,14 @@ import {
   FETCH_PHOTOS_REQUEST,
   FETCH_PHOTOS_SUCCESS,
   FETCH_PHOTOS_FAILURE,
+  SELECT_PHOTO,
 } from '../actions';
 
 
 const initialState = {
   byId: {},
   allIds: [],
+  currentPhotoId: null,
   isFetching: false,
 };
 
@@ -44,6 +46,18 @@ const allIds = (state = initialState.allIds, { type, ...payload }) => {
   }
 };
 
+const currentPhotoId = (state = initialState.currentPhotoId, action) => {
+  const { type, ...payload } = action;
+
+  switch (type) {
+    case SELECT_PHOTO:
+      return payload.photoId;
+
+    default:
+      return state;
+  }
+};
+
 const isFetching = (state = initialState.isFetching, { type }) => {
   switch (type) {
     case FETCH_PHOTOS_REQUEST:
@@ -61,6 +75,7 @@ const isFetching = (state = initialState.isFetching, { type }) => {
 export default combineReducers({
   byId,
   allIds,
+  currentPhotoId,
   isFetching,
 });
 

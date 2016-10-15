@@ -2,7 +2,8 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import reducer from '../reducers';
-import watchFetchPhotosSaga from '../sagas/fetch-photos.saga';
+import fetchPhotosSaga from '../sagas/fetch-photos.saga';
+import slideshowSaga from '../sagas/slideshow.saga';
 
 
 export default function configureStore() {
@@ -14,7 +15,8 @@ export default function configureStore() {
     applyMiddleware(...middlewares)
   );
 
-  sagaMiddleware.run(watchFetchPhotosSaga);
+  sagaMiddleware.run(fetchPhotosSaga);
+  sagaMiddleware.run(slideshowSaga);
 
   return store;
 }

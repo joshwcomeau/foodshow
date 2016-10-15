@@ -6,7 +6,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import configureStore from './store';
 
 import App from './components/App';
-import Gallery from './components/Gallery';
+import Slideshow from './components/Slideshow';
 
 
 const store = configureStore();
@@ -15,7 +15,7 @@ render((
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Gallery} />
+        <IndexRoute component={Slideshow} />
       </Route>
     </Router>
   </Provider>

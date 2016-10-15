@@ -1,11 +1,11 @@
 import { Schema, arrayOf } from 'normalizr';
 
-const user = new Schema('user');
+const users = new Schema('users');
 const category = new Schema('categories');
 
 const photo = new Schema('photos');
 photo.define({
-  user,
+  user: users,
   categories: arrayOf(category),
 });
 

@@ -2,7 +2,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import reducer from '../reducers';
-import watchFetchPhotosSaga from '../sagas/fetch-photos.saga';
+import fetchPhotosSaga from '../sagas/fetch-photos.saga';
+import slideshowSaga from '../sagas/slideshow.saga';
 import DevTools from '../components/DevTools';
 
 
@@ -18,7 +19,8 @@ export default function configureStore() {
     )
   );
 
-  sagaMiddleware.run(watchFetchPhotosSaga);
+  sagaMiddleware.run(fetchPhotosSaga);
+  sagaMiddleware.run(slideshowSaga);
 
   // Allow direct access to the store, for debugging/testing
   window.store = store;
