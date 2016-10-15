@@ -11,3 +11,4 @@ export const secondaryColour = green;
 
 
 export const sidebarWidth = '300px';
+export const slideshowControlsHeight = '50px';

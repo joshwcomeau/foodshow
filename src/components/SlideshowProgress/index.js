@@ -2,17 +2,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 
-import { green } from '../../style-variables';
+import { green, slideshowControlsHeight } from '../../style-variables';
 import { incrementSlide, decrementSlide } from '../../actions';
 
 
 const styles = StyleSheet.create({
   progressBarContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    position: 'relative',
+    height: slideshowControlsHeight,
   },
   progressBar: {
     position: 'absolute',
@@ -23,23 +20,27 @@ const styles = StyleSheet.create({
     margin: 'auto',
     height: '5px',
     background: 'rgba(0,0,0,0.2)',
+    overflow: 'hidden',
   },
   progressComplete: {
     position: 'absolute',
     top: 0,
     left: 0,
+    right: 0,
     bottom: 0,
     background: green,
+    transformOrigin: 'left center',
   },
 });
 
-const SlideshowProgress = ({ progress }) => {
+const SlideshowProgress = ({ mergeStyles, progress }) => {
+  console.log(`translateX(${progress - 100}%)`);
   return (
-    <div className={css(styles.progressBarContainer)}>
+    <div className={css(styles.progressBarContainer, mergeStyles)}>
       <div className={css(styles.progressBar)}>
         <div
           className={css(styles.progressComplete)}
-          style={{ width: `${progress}%` }}
+          style={{ transform: `translateX(${progress - 100}%)` }}
         />
       </div>
     </div>

@@ -44,7 +44,7 @@ const progress = (state = initialState.progress, { type, ...payload }) => {
 
     case SELECT_PHOTO:
       // Restart when the slideshow recommences? May not be necessary.
-      return 0;
+      return 100;
 
     default:
       return state;

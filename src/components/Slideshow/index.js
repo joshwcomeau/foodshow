@@ -4,7 +4,7 @@ import { css, StyleSheet } from 'aphrodite';
 
 import { currentPhotoSelector } from '../../reducers/photos.reducer';
 import { fetchPhotosRequest } from '../../actions';
-import { sidebarWidth } from '../../style-variables';
+import { sidebarWidth, slideshowControlsHeight } from '../../style-variables';
 
 import SlideshowPhoto from '../SlideshowPhoto';
 import SlideshowControls from '../SlideshowControls';
@@ -25,9 +25,7 @@ const styles = StyleSheet.create({
   },
   controls: {
     position: 'relative',
-    flexBasis: '50px',
-  },
-  slideshowImage: {
+    flexBasis: slideshowControlsHeight,
   },
 });
 

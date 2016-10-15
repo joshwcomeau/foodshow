@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 
-import { grey500 } from '../../style-variables';
+import { grey300 } from '../../style-variables';
 import { incrementSlide, decrementSlide } from '../../actions';
 
 import SlideshowProgress from '../SlideshowProgress';
@@ -15,15 +15,18 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    background: grey500,
+    background: grey300,
     display: 'flex',
+  },
+  progressBar: {
+    flex: 1,
   },
 });
 
 const SlideshowControls = ({ mergeStyles, incrementSlide, decrementSlide }) => {
   return (
     <div className={css(styles.controlsContainer, mergeStyles)}>
-      <SlideshowProgress mergeStyles={{ flex: 1 }} />
+      <SlideshowProgress mergeStyles={styles.progressBar} />
     </div>
   );
 };

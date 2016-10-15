@@ -11,8 +11,8 @@ import {
 } from '../actions';
 
 
-const slideLength = 20; // The number of ticks to wait for each slide
-const tickLength = 1000; // The length of a tick, in ms
+const slideLength = 50; // The number of ticks to wait for each slide
+const tickLength = 150; // The length of a tick, in ms
 
 function* slideshow({ page }) {
   let ticks = 0;
