@@ -2,8 +2,11 @@
   "name": "bunsplash",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "react-scripts": "0.6.1"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "aphrodite": "^0.6.0",
@@ -13,10 +16,14 @@
     "react-router": "^2.8.1",
     "unsplash-js": "^4.2.0"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "react-scripts": "0.6.1",
+    "eslint": "3.6.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-loader": "1.5.0",
+    "eslint-plugin-flowtype": "2.18.1",
+    "eslint-plugin-import": "1.16.0",
+    "eslint-plugin-jsx-a11y": "2.2.2",
+    "eslint-plugin-react": "6.3.0"
   }
 }

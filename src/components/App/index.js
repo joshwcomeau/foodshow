@@ -4,6 +4,14 @@ import { css, StyleSheet } from 'aphrodite';
 import { sidebarWidth } from '../../style-variables';
 import Sidebar from '../Sidebar';
 
+
+const styles = StyleSheet.create({
+  mainContent: {
+    position: 'relative',
+    marginRight: sidebarWidth,
+  },
+});
+
 const App = ({ children }) => {
   return (
     <div>
@@ -19,11 +27,5 @@ App.propTypes = {
   children: PropTypes.node,
 };
 
-const styles = StyleSheet.create({
-  mainContent: {
-    position: 'relative',
-    marginRight: 'sidebarWidth',
-  },
-})
 
 export default App;

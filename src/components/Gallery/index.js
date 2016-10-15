@@ -1,8 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
 
-// The home route for this app is the photo gallery.
+const styles = StyleSheet.create({
+  gallery: {
+    padding: '100px',
+  },
+});
+
 class Gallery extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +26,7 @@ class Gallery extends Component {
     return this.state.photos.map(photo => (
       <img
         src={photo}
+        alt="Hamburger from Unsplash"
         style={{ width: '50%' }}
       />
     ));
@@ -31,16 +37,10 @@ class Gallery extends Component {
       <div className={css(styles.gallery)}>
         {this.renderPhotos()}
       </div>
-    )
+    );
   }
 }
 
 Gallery.propTypes = {};
-
-const styles = StyleSheet.create({
-  gallery: {
-    padding: '100px',
-  },
-});
 
 export default Gallery;

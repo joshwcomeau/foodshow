@@ -1,16 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
 import { sidebarWidth, grey100, grey900 } from '../../style-variables';
 
-
-const Sidebar = () => {
-  return (
-    <div className={css(styles.sidebar)}>
-      <h1>I am a sidebar!</h1>
-    </div>
-  );
-};
 
 const styles = StyleSheet.create({
   sidebar: {
@@ -21,7 +13,15 @@ const styles = StyleSheet.create({
     width: sidebarWidth,
     color: grey100,
     background: grey900,
-  }
+  },
 });
+
+const Sidebar = () => {
+  return (
+    <div className={css(styles.sidebar)}>
+      <h1>I am a sidebar!</h1>
+    </div>
+  );
+};
 
 export default Sidebar;
