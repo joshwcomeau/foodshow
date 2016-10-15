@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
+import { fetchPhotos } from '../../utils/unsplash.utils';
+
 
 const styles = StyleSheet.create({
   gallery: {
@@ -19,7 +21,10 @@ class Gallery extends Component {
 
   componentDidMount() {
     // TODO: API call here.
-
+    fetchPhotos()
+      .then(response => {
+        console.log(JSON.stringify(response, null, 2));
+      });
   }
 
   renderPhotos() {
