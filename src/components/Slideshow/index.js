@@ -7,6 +7,7 @@ import { fetchPhotosRequest } from '../../actions';
 import { sidebarWidth } from '../../style-variables';
 
 import SlideshowPhoto from '../SlideshowPhoto';
+import SlideshowControls from '../SlideshowControls';
 
 const styles = StyleSheet.create({
   slideshow: {
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   controls: {
+    position: 'relative',
     flexBasis: '50px',
   },
   slideshowImage: {
@@ -49,7 +51,8 @@ class Slideshow extends Component {
           <SlideshowPhoto photo={photo} />
         </div>
 
-        <div className={css(styles.controls)}>Im below</div>
+        <SlideshowControls mergeStyles={styles.controls} />
+
       </div>
     );
   }

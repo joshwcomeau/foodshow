@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Photo = ({
+const SlideshowPhoto = ({
   mergeStyles,
   photo,
   user,
@@ -47,7 +47,7 @@ const Photo = ({
   );
 };
 
-Photo.propTypes = {
+SlideshowPhoto.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   mergeStyles: PropTypes.object,
   photo: PropTypes.shape({
@@ -68,4 +68,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { pauseSlideshow, resumeSlideshow }
-)(Photo);
+)(SlideshowPhoto);
