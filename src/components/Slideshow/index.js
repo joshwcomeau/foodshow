@@ -2,22 +2,30 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 
-import { photosListSelector } from '../../reducers/photos.reducer';
+import { currentPhotoSelector } from '../../reducers/photos.reducer';
 import { fetchPhotosRequest } from '../../actions';
+import { sidebarWidth } from '../../style-variables';
 
+import SlideshowPhoto from '../SlideshowPhoto';
 
 const styles = StyleSheet.create({
   slideshow: {
-    padding: '80px 100px',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: sidebarWidth,
+    bottom: 0,
+    display: 'flex',
+    flexDirection: 'column',
   },
-  slideshowImageContainer: {
-    marginBottom: '50px',
+  photoContainer: {
+    position: 'relative',
+    flex: 1,
+  },
+  controls: {
+    flexBasis: '50px',
   },
   slideshowImage: {
-    display: 'block',
-    width: '100%',
-    borderRadius: 10,
-    boxShadow: '0px 2px 10px rgba(0,0,0,0.1)',
   },
 });
 
@@ -27,40 +35,38 @@ class Slideshow extends Component {
     this.props.fetchPhotosRequest();
   }
 
-  renderPhotos() {
-    return this.props.photos.map(photo => (
-      <div className={css(styles.slideshowImageContainer)}>
-        <img
-          key={photo.id}
-          src={photo.urls.regular}
-          className={css(styles.slideshowImage)}
-          alt="Hamburger from Unsplash"
-        />
-      </div>
-    ));
-  }
-
   render() {
+    const { photo } = this.props;
+
+    // Don't render until our initial photo has been fetched.
+    if (!photo) {
+      return null;
+    }
+
     return (
       <div className={css(styles.slideshow)}>
-        {this.renderPhotos()}
+        <div className={css(styles.photoContainer)}>
+          <SlideshowPhoto photo={photo} />
+        </div>
+
+        <div className={css(styles.controls)}>Im below</div>
       </div>
     );
   }
 }
 
 Slideshow.propTypes = {
-  photos: PropTypes.arrayOf(PropTypes.shape({
+  photo: PropTypes.shape({
     id: PropTypes.string.isRequired,
     urls: PropTypes.shape({
       regular: PropTypes.string.isRequired,
     }).isRequired,
-  })).isRequired,
+  }),
   fetchPhotosRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  photos: photosListSelector(state),
+  photo: currentPhotoSelector(state),
 });
 
 export default connect(mapStateToProps, { fetchPhotosRequest })(Slideshow);

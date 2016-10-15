@@ -42,7 +42,7 @@ const usersByIdSelector = state => state.users.byId;
 
 // Create an array of photos, for easy consumption.
 // We need to take care to assign the ID to each object.
-export const photosListSelector = createSelector(
+export const currentPhotographerSelector = createSelector(
   currentPhotoIdSelector,
   photosByIdSelector,
   usersByIdSelector,

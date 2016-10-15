@@ -36,7 +36,7 @@ function* slideshow({ page }) {
   while (ticks < slideLength) {
     yield delay(tickLength);
 
-    ticks++;
+    ticks += 1;
 
     // Calculate the percentage through this slide
     const progress = (ticks / slideLength) * 100;

@@ -85,6 +85,7 @@ export default combineReducers({
 // //////////////////
 const byIdSelector = state => state.photos.byId;
 const allIdsSelector = state => state.photos.allIds;
+const currentPhotoIdSelector = state => state.photos.currentPhotoId;
 
 // Create an array of photos, for easy consumption.
 // We need to take care to assign the ID to each object.
@@ -97,4 +98,10 @@ export const photosListSelector = createSelector(
       id,
     }))
   )
+);
+
+export const currentPhotoSelector = createSelector(
+  byIdSelector,
+  currentPhotoIdSelector,
+  (byId, currentPhotoId) => byId[currentPhotoId]
 );
