@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router';
 import { css, StyleSheet } from 'aphrodite';
 
-import { grey100, grey900, blue } from '../../style-variables';
+import { blue, green } from '../../style-variables';
 import hamburgerIcon from '../../images/hamburger.svg';
 
 const logoRectangleAnimation = {
   from: {
-    transform: 'translateX(0)',
+    transform: 'translateX(75px)',
   },
   to: {
-    transform: 'translateX(400px)',
+    transform: 'translateX(410px)',
   },
 };
 
@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
     cursor: 'pointer',
     textDecoration: 'none',
 
-    ':hover [class*=logoEffectRectangle]': {
+    ':hover [class*=rectangleContainer]': {
       animationName: logoRectangleAnimation,
       animationDuration: '1000ms',
-      animationIterationCount: 'infinite',
+      animationIterationCount: '1',
       animationFillMode: 'both',
     },
   },
@@ -48,22 +48,26 @@ const styles = StyleSheet.create({
     bottom: '-5px',
     margin: 'auto',
     width: '180px',
-    height: '5px',
+    height: '4px',
     overflow: 'hidden',
   },
 
-  logoEffectRectangle: {
+  rectangleContainer: {
     position: 'absolute',
     top: '-100px',
     left: '-200px',
     width: '100px',
     height: '200px',
-
-    ':after': {
-      content: '',
-      background: blue,
-      transform: 'rotate(45deg)',
-    },
+  },
+  rectangle: {
+    content: '',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    transform: 'rotate(45deg)',
+    background: green,
   },
 });
 
@@ -78,10 +82,9 @@ const Logo = () => {
       <h1 className={css(styles.logo)}>bunsplash</h1>
 
       <div className={css(styles.logoEffect)}>
-        <div
-          className={css(styles.logoEffectRectangle)}
-          data-rectangle
-        />
+        <div className={css(styles.rectangleContainer)}>
+          <div className={css(styles.rectangle)} />
+        </div>
       </div>
     </Link>
   );
