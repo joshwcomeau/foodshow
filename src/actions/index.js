@@ -8,9 +8,10 @@ export const fetchPhotosRequest = ({ page = 1 } = {}) => ({
   page,
 });
 
-export const fetchPhotosSuccess = ({ photos }) => ({
+export const fetchPhotosSuccess = ({ photos, photoIds }) => ({
   type: FETCH_PHOTOS_SUCCESS,
   photos,
+  photoIds,
 });
 
 export const fetchPhotosFailure = ({ error }) => ({

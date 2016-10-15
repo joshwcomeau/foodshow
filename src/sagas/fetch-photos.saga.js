@@ -17,10 +17,10 @@ function* fetchPhotos({ page }) {
     const response = yield call(API.fetchPhotos, { page });
 
     // Normalize the response
-    const { entities } = normalize(response, arrayOf(photoSchema));
+    const { result: photoIds, entities } = normalize(response, arrayOf(photoSchema));
     const { photos, user, categories } = entities;
 
-    yield put(fetchPhotosSuccess({ photos, user, categories }));
+    yield put(fetchPhotosSuccess({ photos, photoIds }));
   } catch (error) {
     yield put(fetchPhotosFailure({ error }));
   }

@@ -10,6 +10,7 @@ import {
 
 const initialState = {
   byId: {},
+  allIds: [],
   isFetching: false,
 };
 
@@ -24,6 +25,19 @@ const byId = (state = initialState.byId, { type, ...payload }) => {
         ...state,
         ...payload.photos,
       };
+
+    default:
+      return state;
+  }
+};
+
+const allIds = (state = initialState.allIds, { type, ...payload }) => {
+  switch (type) {
+    case FETCH_PHOTOS_SUCCESS:
+      return [
+        ...state,
+        ...payload.photoIds,
+      ];
 
     default:
       return state;
@@ -46,6 +60,7 @@ const isFetching = (state = initialState.isFetching, { type }) => {
 
 export default combineReducers({
   byId,
+  allIds,
   isFetching,
 });
 
@@ -54,13 +69,15 @@ export default combineReducers({
 // Selectors /////////
 // //////////////////
 const byIdSelector = state => state.photos.byId;
+const allIdsSelector = state => state.photos.allIds;
 
 // Create an array of photos, for easy consumption.
 // We need to take care to assign the ID to each object.
 export const photosListSelector = createSelector(
   byIdSelector,
-  (byId) => (
-    Object.keys(byId).map(id => ({
+  allIdsSelector,
+  (byId, allIds) => (
+    allIds.map(id => ({
       ...byId[id],
       id,
     }))
