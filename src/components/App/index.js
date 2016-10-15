@@ -3,6 +3,7 @@ import { css, StyleSheet } from 'aphrodite';
 
 import { sidebarWidth } from '../../style-variables';
 import Sidebar from '../Sidebar';
+import DevTools from '../DevTools';
 
 
 const styles = StyleSheet.create({
@@ -19,6 +20,8 @@ const App = ({ children }) => {
         {children}
       </div>
       <Sidebar />
+
+      <DevTools />
     </div>
   );
 };

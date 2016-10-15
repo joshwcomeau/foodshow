@@ -10,5 +10,4 @@ export const primaryColour = blue;
 export const secondaryColour = green;
 
 
-
 export const sidebarWidth = '300px';

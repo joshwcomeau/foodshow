@@ -1,39 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 
-import { fetchPhotos } from '../../utils/unsplash.utils';
+import { photosListSelector } from '../../reducers/photos.reducer';
+import { fetchPhotosRequest } from '../../actions';
 
 
 const styles = StyleSheet.create({
   gallery: {
     padding: '100px',
   },
+  galleryImageContainer: {
+    marginBottom: '50px',
+  },
+  galleryImage: {
+    display: 'block',
+    width: '100%',
+    borderRadius: 10,
+    boxShadow: '0px 2px 10px rgba(0,0,0,0.1)',
+  },
 });
 
 class Gallery extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      photos: [],
-    };
-  }
-
   componentDidMount() {
-    // TODO: API call here.
-    fetchPhotos()
-      .then(response => {
-        console.log(JSON.stringify(response, null, 2));
-      });
+    this.props.fetchPhotosRequest();
   }
 
   renderPhotos() {
-    return this.state.photos.map(photo => (
-      <img
-        src={photo}
-        alt="Hamburger from Unsplash"
-        style={{ width: '50%' }}
-      />
+    return this.props.photos.map(photo => (
+      <div className={css(styles.galleryImageContainer)}>
+        <img
+          key={photo.id}
+          src={photo.urls.regular}
+          className={css(styles.galleryImage)}
+          alt="Hamburger from Unsplash"
+        />
+      </div>
     ));
   }
 
@@ -46,6 +48,18 @@ class Gallery extends Component {
   }
 }
 
-Gallery.propTypes = {};
+Gallery.propTypes = {
+  photos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    urls: PropTypes.shape({
+      regular: PropTypes.string.isRequired,
+    }).isRequired,
+  })).isRequired,
+  fetchPhotosRequest: PropTypes.func.isRequired,
+};
 
-export default Gallery;
+const mapStateToProps = state => ({
+  photos: photosListSelector(state),
+});
+
+export default connect(mapStateToProps, { fetchPhotosRequest })(Gallery);

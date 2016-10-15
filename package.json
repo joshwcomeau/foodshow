@@ -11,19 +11,27 @@
   "dependencies": {
     "aphrodite": "^0.6.0",
     "lodash": "^4.16.4",
+    "normalizr": "^2.2.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
+    "redux": "^3.6.0",
+    "redux-saga": "^0.12.0",
+    "reselect": "^2.5.4",
     "unsplash-js": "^4.2.0"
   },
   "devDependencies": {
-    "react-scripts": "0.6.1",
     "eslint": "3.6.0",
     "eslint-config-airbnb": "^12.0.0",
     "eslint-loader": "1.5.0",
     "eslint-plugin-flowtype": "2.18.1",
     "eslint-plugin-import": "1.16.0",
     "eslint-plugin-jsx-a11y": "2.2.2",
-    "eslint-plugin-react": "6.3.0"
+    "eslint-plugin-react": "6.3.0",
+    "react-scripts": "0.6.1",
+    "redux-devtools": "^3.3.1",
+    "redux-devtools-dock-monitor": "^1.1.1",
+    "redux-devtools-log-monitor": "^1.0.11"
   }
 }
