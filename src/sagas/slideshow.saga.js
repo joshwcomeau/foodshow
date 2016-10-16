@@ -9,6 +9,7 @@ import {
   selectPhoto,
   updateSlideshowProgress,
 } from '../actions';
+import { isActiveSelector } from '../reducers/slideshow.reducer';
 
 
 const slideLength = 50; // The number of ticks to wait for each slide
@@ -22,9 +23,9 @@ function* slideshow({ page }) {
 
     // Check to see if our slideshow is still running.
     // (it can be paused by mousing over the photo).
-    const status = yield select(state => state.slideshow.status);
+    const isActive = yield select(isActiveSelector);
 
-    if (status === 'RUNNING') {
+    if (isActive) {
       ticks += 1;
 
       // Calculate the percentage through this slide

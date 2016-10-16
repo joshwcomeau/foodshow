@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { createSelector } from 'reselect';
 
 import {
   PAUSE_SLIDESHOW,
@@ -60,3 +61,9 @@ export default combineReducers({
 // ////////////////////
 // Selectors /////////
 // //////////////////
+const statusSelector = state => state.slideshow.status;
+
+export const isActiveSelector = createSelector(
+  statusSelector,
+  status => status === statuses.RUNNING
+);

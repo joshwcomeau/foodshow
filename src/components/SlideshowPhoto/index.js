@@ -4,6 +4,7 @@ import { css, StyleSheet } from 'aphrodite';
 
 import { pauseSlideshow, resumeSlideshow } from '../../actions';
 import { currentPhotographerSelector } from '../../reducers/users.reducer';
+import { isActiveSelector } from '../../reducers/slideshow.reducer';
 
 
 const styles = StyleSheet.create({
@@ -16,13 +17,24 @@ const styles = StyleSheet.create({
   },
   photo: {
     position: 'relative',
+    zIndex: 1,
     width: '100%',
     height: '100%',
     display: 'block',
-    borderRadius: 10,
+    border: '6px solid #FFF',
+    borderRadius: 3,
     boxShadow: '0px 2px 10px rgba(0,0,0,0.1)',
     backgroundSize: 'cover',
     backgroundPosition: 'center center',
+  },
+  photoInfo: {
+    position: 'absolute',
+    zIndex: 2,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'radial-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6))',
   },
 });
 
@@ -30,6 +42,7 @@ const SlideshowPhoto = ({
   mergeStyles,
   photo,
   user,
+  isActive,
   pauseSlideshow,
   resumeSlideshow,
 }) => {
@@ -43,6 +56,12 @@ const SlideshowPhoto = ({
         className={css(styles.photo)}
         style={{ backgroundImage: `url(${photo.urls.regular})` }}
       />
+
+      <div
+        className={css(styles.photoInfo, isActive && styles.photoInfoVisible)}
+      >
+        <div className={css(styles.backdrop)} />
+      </div>
     </div>
   );
 };
@@ -57,12 +76,14 @@ SlideshowPhoto.propTypes = {
     }).isRequired,
   }),
   user: PropTypes.shape({}),
+  isActive: PropTypes.bool.isRequired,
   pauseSlideshow: PropTypes.func.isRequired,
   resumeSlideshow: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   user: currentPhotographerSelector(state),
+  isActive: isActiveSelector(state),
 });
 
 export default connect(

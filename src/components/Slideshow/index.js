@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 
 import { currentPhotoSelector } from '../../reducers/photos.reducer';
+import { isActiveSelector } from '../../reducers/slideshow.reducer';
 import { fetchPhotosRequest } from '../../actions';
-import { green, sidebarWidth } from '../../style-variables';
+import { sidebarWidth } from '../../style-variables';
 
 import SlideshowPhoto from '../SlideshowPhoto';
 import ProgressBar from '../ProgressBar';
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
   },
   photoContainer: {
     position: 'relative',
+    zIndex: 1,
     flex: 1,
   },
   progressBar: {
@@ -28,6 +30,17 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
+  },
+
+  backdrop: {
+    position: 'absolute',
+    zIndex: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0,0,0,0.1)',
+    transition: 'opacity 1000ms',
   },
 });
 
@@ -38,7 +51,7 @@ class Slideshow extends Component {
   }
 
   render() {
-    const { photo, progress } = this.props;
+    const { photo, progress, isActive } = this.props;
 
     // Don't render until our initial photo has been fetched.
     if (!photo) {
@@ -47,10 +60,15 @@ class Slideshow extends Component {
 
     return (
       <div className={css(styles.slideshow)}>
-        <ProgressBar progress={progress} />
+        <ProgressBar {...{ isActive, progress }} />
         <div className={css(styles.photoContainer)}>
           <SlideshowPhoto photo={photo} />
         </div>
+
+        <div
+          className={css(styles.backdrop)}
+          style={{ opacity: isActive ? 0 : 1 }}
+        />
       </div>
     );
   }
@@ -64,12 +82,14 @@ Slideshow.propTypes = {
     }).isRequired,
   }),
   progress: PropTypes.number.isRequired,
+  isActive: PropTypes.bool.isRequired,
   fetchPhotosRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   photo: currentPhotoSelector(state),
   progress: state.slideshow.progress,
+  isActive: isActiveSelector(state),
 });
 
 export default connect(mapStateToProps, { fetchPhotosRequest })(Slideshow);
