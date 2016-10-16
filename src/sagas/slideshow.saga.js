@@ -36,9 +36,10 @@ function* slideshow({ page }) {
 
   // Once that slide is done, select our next photo,
   // which will restart the process.
-  const photos = yield select(state => state.photos);
-  const currentPhotoIndex = photos.allIds.indexOf(photos.currentPhotoId);
-  const nextPhotoId = photos.allIds[currentPhotoIndex + 1];
+  const { allIds, currentPhotoId } = yield select(state => state.photos);
+
+  const currentPhotoIndex = allIds.indexOf(currentPhotoId);
+  const nextPhotoId = allIds[(currentPhotoIndex + 1) % allIds.length];
 
   yield put(selectPhoto({ photoId: nextPhotoId }));
 }

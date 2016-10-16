@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
 });
 
 const SlideshowProgress = ({ mergeStyles, progress }) => {
-  console.log(`translateX(${progress - 100}%)`);
   return (
     <div className={css(styles.progressBarContainer, mergeStyles)}>
       <div className={css(styles.progressBar)}>
