@@ -12,8 +12,11 @@ const useFixtures = false;
 const unsplash = new Unsplash({
   applicationId: '2cc5f79ee1b4d8f8ef036bada6b0e1656239f2d96578addd18bd8f7fee9ff3f0',
   secret: '79adde5db99ee5cf6305639c4e92c117254315234c7ea418f951ca5a1ff18fc3',
-  callbackUrl: 'localhost:3000/auth/callback',
+  callbackUrl: 'http://localhost:3000',
 });
+
+// TEMP!
+window.unsplash = unsplash;
 
 const toJson = response => response.json();
 
@@ -25,6 +28,16 @@ export const login = () => {
   ]);
 
   location.assign(authenticationUrl);
+};
+
+export const authenticateFromCode = ({ code }) => {
+  return unsplash.auth
+    .userAuthentication(code)
+    .then(toJson)
+    .then(result => {
+      console.log('Result!', result);
+      return unsplash.auth.setBearerToken(result.access_token);
+    });
 };
 
 export const fetchPhotos = () => {

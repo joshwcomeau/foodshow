@@ -17,8 +17,6 @@ function* fetchPhotos({ page }) {
   try {
     const response = yield call(API.fetchPhotos, { page });
 
-    console.log(response);
-
     // Normalize the response
     const { result: photoIds, entities } = normalize(response, arrayOf(photoSchema));
     const { photos, users } = entities;
@@ -37,5 +35,5 @@ function* fetchPhotos({ page }) {
 // WATCHERS /////////
 // /////////////////
 export default function* watchFetchPhotos() {
-  yield* takeEvery(FETCH_PHOTOS_REQUEST, fetchPhotos);
+  yield* takeLatest(FETCH_PHOTOS_REQUEST, fetchPhotos);
 }

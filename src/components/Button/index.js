@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
 const Button = ({ mergeStyles, children, onClick, color }) => (
   <button
     className={css(styles.button, mergeStyles)}
+    onClick={onClick}
     style={{
       color,
       borderColor: color,
     }}
   >
-    {console.log(color)}
     {children}
   </button>
 );

@@ -3,6 +3,8 @@ export const FETCH_PHOTOS_REQUEST = 'FETCH_PHOTOS_REQUEST';
 export const FETCH_PHOTOS_SUCCESS = 'FETCH_PHOTOS_SUCCESS';
 export const FETCH_PHOTOS_FAILURE = 'FETCH_PHOTOS_FAILURE';
 export const INCREMENT_SLIDE = 'INCREMENT_SLIDE';
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const PAUSE_SLIDESHOW = 'PAUSE_SLIDESHOW';
 export const RESUME_SLIDESHOW = 'RESUME_SLIDESHOW';
 export const SELECT_PHOTO = 'SELECT_PHOTO';
@@ -33,6 +35,14 @@ export const fetchPhotosFailure = ({ error }) => ({
 
 export const incrementSlide = () => ({
   type: INCREMENT_SLIDE,
+});
+
+export const loginRequest = () => ({
+  type: LOGIN_REQUEST,
+});
+
+export const loginSuccess = () => ({
+  type: LOGIN_SUCCESS,
 });
 
 export const pauseSlideshow = () => ({
