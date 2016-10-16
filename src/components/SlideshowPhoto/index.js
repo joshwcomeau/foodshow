@@ -5,9 +5,10 @@ import { css, StyleSheet } from 'aphrodite';
 import { pauseSlideshow, resumeSlideshow } from '../../actions';
 import { currentPhotographerSelector } from '../../reducers/users.reducer';
 import { isActiveSelector } from '../../reducers/slideshow.reducer';
-import { grey100 } from '../../style-variables';
+import { red } from '../../style-variables';
 
 import UserAttribution from '../UserAttribution';
+import IconButton from '../IconButton';
 
 
 const styles = StyleSheet.create({
@@ -48,6 +49,12 @@ const styles = StyleSheet.create({
     top: '25px',
     left: '25px',
   },
+
+  likeButton: {
+    position: 'absolute',
+    top: '25px',
+    right: '25px',
+  },
 });
 
 const SlideshowPhoto = ({
@@ -78,6 +85,14 @@ const SlideshowPhoto = ({
           profileImage={user.profile_image.small}
           href={user.links.html}
           mergeStyles={styles.photographer}
+        />
+
+        <IconButton
+          iconName="favorite"
+          color={red}
+          iconColor={red}
+          iconSize={16}
+          mergeStyles={styles.likeButton}
         />
       </div>
     </div>

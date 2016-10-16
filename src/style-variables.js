@@ -3,6 +3,7 @@ export const grey300 = '#a4a8af';
 export const grey500 = '#747880';
 export const grey900 = '#222327';
 
+export const red = '#ff4436';
 export const blue = '#40b2e1';
 export const green = '#8fce35';
 

@@ -13,6 +13,7 @@ import { toggleSidebar } from '../../actions';
 import Divider from '../Divider';
 import Logo from '../Logo';
 import SidebarToggleButton from '../SidebarToggleButton';
+import Button from '../Button';
 
 
 const styles = StyleSheet.create({
@@ -25,6 +26,7 @@ const styles = StyleSheet.create({
     color: grey100,
     background: grey900,
     transition: 'transform 500ms',
+    textAlign: 'center',
   },
 
   toggleButton: {
@@ -40,13 +42,16 @@ const styles = StyleSheet.create({
 
   header: {
     padding: '50px 0',
-    textAlign: 'center',
   },
 
   subtitle: {
     margin: '30px 60px',
     fontSize: '13px',
     // fontFamily: 'Trirong',
+  },
+
+  logInButton: {
+    marginTop: '40px',
   },
 });
 
@@ -72,6 +77,8 @@ const Sidebar = ({ isVisible, toggleSidebar }) => {
       </header>
 
       <Divider />
+
+      <Button mergeStyles={styles.logInButton}>Log In to Unsplash</Button>
     </div>
   );
 };
