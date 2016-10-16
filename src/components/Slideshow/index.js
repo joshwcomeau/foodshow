@@ -4,10 +4,10 @@ import { css, StyleSheet } from 'aphrodite';
 
 import { currentPhotoSelector } from '../../reducers/photos.reducer';
 import { fetchPhotosRequest } from '../../actions';
-import { sidebarWidth, slideshowControlsHeight } from '../../style-variables';
+import { green, sidebarWidth } from '../../style-variables';
 
 import SlideshowPhoto from '../SlideshowPhoto';
-import SlideshowControls from '../SlideshowControls';
+import ProgressBar from '../ProgressBar';
 
 const styles = StyleSheet.create({
   slideshow: {
@@ -23,9 +23,11 @@ const styles = StyleSheet.create({
     position: 'relative',
     flex: 1,
   },
-  controls: {
-    position: 'relative',
-    flexBasis: slideshowControlsHeight,
+  progressBar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
   },
 });
 
@@ -36,7 +38,7 @@ class Slideshow extends Component {
   }
 
   render() {
-    const { photo } = this.props;
+    const { photo, progress } = this.props;
 
     // Don't render until our initial photo has been fetched.
     if (!photo) {
@@ -45,12 +47,10 @@ class Slideshow extends Component {
 
     return (
       <div className={css(styles.slideshow)}>
+        <ProgressBar progress={progress} />
         <div className={css(styles.photoContainer)}>
           <SlideshowPhoto photo={photo} />
         </div>
-
-        <SlideshowControls mergeStyles={styles.controls} />
-
       </div>
     );
   }
@@ -63,11 +63,13 @@ Slideshow.propTypes = {
       regular: PropTypes.string.isRequired,
     }).isRequired,
   }),
+  progress: PropTypes.number.isRequired,
   fetchPhotosRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   photo: currentPhotoSelector(state),
+  progress: state.slideshow.progress,
 });
 
 export default connect(mapStateToProps, { fetchPhotosRequest })(Slideshow);
