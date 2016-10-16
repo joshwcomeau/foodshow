@@ -10,5 +10,6 @@ export const primaryColour = blue;
 export const secondaryColour = green;
 
 
-export const sidebarWidth = '300px';
+export const sidebarWidthNumber = 300;
+export const sidebarWidth = `${sidebarWidthNumber}px`;
 export const slideshowControlsHeight = '50px';

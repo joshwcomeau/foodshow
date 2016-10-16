@@ -5,9 +5,10 @@ import { grey900 } from '../../style-variables';
 import iconMap from '../../utils/icon-map.utils';
 
 
-const Icon = ({ value, size, color }) => {
+const Icon = ({ value, size, color, style }) => {
   const divStyles = {
     display: 'inline-block',
+    ...style,
   };
 
   const IconComponent = iconMap[value];
@@ -25,6 +26,8 @@ Icon.propTypes = {
   value: PropTypes.string.isRequired,
   color: PropTypes.string,
   size: PropTypes.number,
+  // eslint-disable-next-line react/forbid-prop-types
+  style: PropTypes.object,
 };
 
 Icon.defaultProps = {

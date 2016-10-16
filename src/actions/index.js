@@ -6,6 +6,7 @@ export const INCREMENT_SLIDE = 'INCREMENT_SLIDE';
 export const PAUSE_SLIDESHOW = 'PAUSE_SLIDESHOW';
 export const RESUME_SLIDESHOW = 'RESUME_SLIDESHOW';
 export const SELECT_PHOTO = 'SELECT_PHOTO';
+export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 export const UPDATE_SLIDESHOW_PROGRESS = 'UPDATE_SLIDESHOW_PROGRESS';
 
 
@@ -45,6 +46,10 @@ export const resumeSlideshow = () => ({
 export const selectPhoto = ({ photoId }) => ({
   type: SELECT_PHOTO,
   photoId,
+});
+
+export const toggleSidebar = () => ({
+  type: TOGGLE_SIDEBAR,
 });
 
 export const updateSlideshowProgress = ({ progress }) => ({

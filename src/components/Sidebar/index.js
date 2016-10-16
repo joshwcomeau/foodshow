@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 
-import { sidebarWidth, grey100, grey900 } from '../../style-variables';
+import {
+  sidebarWidth,
+  sidebarWidthNumber,
+  grey100,
+  grey900,
+} from '../../style-variables';
+import { toggleSidebar } from '../../actions';
+
 import Divider from '../Divider';
-import Icon from '../Icon';
 import Logo from '../Logo';
+import SidebarToggleButton from '../SidebarToggleButton';
+
 
 const styles = StyleSheet.create({
   sidebar: {
@@ -15,6 +24,14 @@ const styles = StyleSheet.create({
     width: sidebarWidth,
     color: grey100,
     background: grey900,
+    transition: 'transform 500ms',
+  },
+
+  toggleButton: {
+    position: 'absolute',
+    top: '15px',
+    left: 0,
+    transform: 'translateX(-60%)',
   },
 
   hamburger: {
@@ -33,9 +50,20 @@ const styles = StyleSheet.create({
   },
 });
 
-const Sidebar = () => {
+const Sidebar = ({ isActive, toggleSidebar }) => {
   return (
-    <div className={css(styles.sidebar)}>
+    <div
+      className={css(styles.sidebar)}
+      style={{
+        transform: isActive ? 'translateX(0)' : `translateX(${sidebarWidthNumber - 6}px)`,
+      }}
+    >
+      <SidebarToggleButton
+        mergeStyles={styles.toggleButton}
+        isActive={isActive}
+        toggleSidebar={toggleSidebar}
+      />
+
       <header className={css(styles.header)}>
         <Logo />
         <p className={css(styles.subtitle)}>
@@ -48,4 +76,14 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+Sidebar.propTypes = {
+  isActive: PropTypes.bool.isRequired,
+  toggleSidebar: PropTypes.func.isRequired,
+};
+
+
+const mapStateToProps = state => ({
+  isActive: state.ui.sidebar.isActive,
+});
+
+export default connect(mapStateToProps, { toggleSidebar })(Sidebar);
