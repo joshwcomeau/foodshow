@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    background: 'rgba(0,0,0,0.1)',
+    background: 'rgba(0,0,0,0.125)',
     transition: 'opacity 1000ms',
   },
 });

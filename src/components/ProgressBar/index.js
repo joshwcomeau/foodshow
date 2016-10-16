@@ -1,36 +1,52 @@
 import React, { PropTypes } from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-import { green } from '../../style-variables';
+import { green, grey300 } from '../../style-variables';
 
 
 const styles = StyleSheet.create({
-  progressBar: {
+  progressContainer: {
     position: 'relative',
     height: '5px',
     overflow: 'hidden',
   },
-  progressComplete: {
+  progress: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     transformOrigin: 'left center',
+    transition: 'opacity 2000ms',
   },
 });
 
-const ProgressBar = ({ mergeStyles, progress, barColor, backgroundColor }) => {
+const ProgressBar = ({
+  mergeStyles,
+  progress,
+  isActive,
+  barColorActive,
+  barColorPaused,
+  backgroundColor,
+}) => {
   return (
     <div
-      className={css(styles.progressBar, mergeStyles)}
+      className={css(styles.progressContainer, mergeStyles)}
       style={{ backgroundColor }}
     >
       <div
-        className={css(styles.progressComplete)}
+        className={css(styles.progress, styles.active)}
         style={{
           transform: `translateX(${progress - 100}%)`,
-          backgroundColor: barColor,
+          backgroundColor: barColorActive,
+        }}
+      />
+      <div
+        className={css(styles.progress, styles.inactive)}
+        style={{
+          transform: `translateX(${progress - 100}%)`,
+          backgroundColor: barColorPaused,
+          opacity: isActive ? 0 : 1,
         }}
       />
     </div>
@@ -41,12 +57,15 @@ ProgressBar.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   mergeStyles: PropTypes.object,
   progress: PropTypes.number.isRequired,
-  barColor: PropTypes.string,
+  isActive: PropTypes.bool.isRequired,
+  barColorActive: PropTypes.string,
+  barColorPaused: PropTypes.string,
   backgroundColor: PropTypes.string,
 };
 
 ProgressBar.defaultProps = {
-  barColor: green,
+  barColorActive: green,
+  barColorPaused: grey300,
   backgroundColor: 'transparent',
 };
 

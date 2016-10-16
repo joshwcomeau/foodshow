@@ -5,6 +5,7 @@ import { css, StyleSheet } from 'aphrodite';
 import { pauseSlideshow, resumeSlideshow } from '../../actions';
 import { currentPhotographerSelector } from '../../reducers/users.reducer';
 import { isActiveSelector } from '../../reducers/slideshow.reducer';
+import { grey100 } from '../../style-variables';
 
 
 const styles = StyleSheet.create({
@@ -34,7 +35,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    background: 'radial-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6))',
+    background: 'radial-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.3))',
+    border: '6px solid #E3E3E3',
+    borderRadius: 3,
+    transition: 'opacity 1500ms',
   },
 });
 
@@ -58,7 +62,8 @@ const SlideshowPhoto = ({
       />
 
       <div
-        className={css(styles.photoInfo, isActive && styles.photoInfoVisible)}
+        className={css(styles.photoInfo)}
+        style={{ opacity: isActive ? 0 : 1 }}
       >
         <div className={css(styles.backdrop)} />
       </div>

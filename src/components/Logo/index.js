@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { css, StyleSheet } from 'aphrodite';
 
-import { blue, green } from '../../style-variables';
+import { blue } from '../../style-variables';
 import hamburgerIcon from '../../images/hamburger.svg';
 
 const logoRectangleAnimation = {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     transform: 'rotate(45deg)',
-    background: green,
+    background: blue,
   },
 });
 

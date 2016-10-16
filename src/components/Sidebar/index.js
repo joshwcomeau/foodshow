@@ -2,8 +2,9 @@ import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
 import { sidebarWidth, grey100, grey900 } from '../../style-variables';
-import Logo from '../Logo';
 import Divider from '../Divider';
+import Icon from '../Icon';
+import Logo from '../Logo';
 
 const styles = StyleSheet.create({
   sidebar: {
