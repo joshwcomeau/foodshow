@@ -67,7 +67,7 @@ const Sidebar = ({ isActive, toggleSidebar }) => {
       <header className={css(styles.header)}>
         <Logo />
         <p className={css(styles.subtitle)}>
-          For those times in life when you just feel like looking at pictures of hamburgers.
+          For those times in life when you just feel like looking at pictures of food.
         </p>
       </header>
 

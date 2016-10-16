@@ -79,7 +79,7 @@ const Logo = () => {
         role="presentation"
         className={css(styles.hamburger)}
       />
-      <h1 className={css(styles.logo)}>bunsplash</h1>
+      <h1 className={css(styles.logo)}>foodshow</h1>
 
       <div className={css(styles.logoEffect)}>
         <div className={css(styles.rectangleContainer)}>
