@@ -7,6 +7,8 @@ import { currentPhotographerSelector } from '../../reducers/users.reducer';
 import { isActiveSelector } from '../../reducers/slideshow.reducer';
 import { grey100 } from '../../style-variables';
 
+import UserAttribution from '../UserAttribution';
+
 
 const styles = StyleSheet.create({
   photoContainer: {
@@ -38,7 +40,13 @@ const styles = StyleSheet.create({
     background: 'radial-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.3))',
     border: '6px solid #E3E3E3',
     borderRadius: 3,
-    transition: 'opacity 1500ms',
+    transition: 'opacity 500ms',
+  },
+
+  photographer: {
+    position: 'absolute',
+    top: '25px',
+    left: '25px',
   },
 });
 
@@ -65,7 +73,12 @@ const SlideshowPhoto = ({
         className={css(styles.photoInfo)}
         style={{ opacity: isActive ? 0 : 1 }}
       >
-        <div className={css(styles.backdrop)} />
+        <UserAttribution
+          name={user.name}
+          profileImage={user.profile_image.small}
+          href={user.links.html}
+          mergeStyles={styles.photographer}
+        />
       </div>
     </div>
   );
@@ -80,7 +93,15 @@ SlideshowPhoto.propTypes = {
       regular: PropTypes.string.isRequired,
     }).isRequired,
   }),
-  user: PropTypes.shape({}),
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    profile_image: PropTypes.shape({
+      small: PropTypes.string,
+    }),
+    links: PropTypes.shape({
+      html: PropTypes.string,
+    }),
+  }),
   isActive: PropTypes.bool.isRequired,
   pauseSlideshow: PropTypes.func.isRequired,
   resumeSlideshow: PropTypes.func.isRequired,
