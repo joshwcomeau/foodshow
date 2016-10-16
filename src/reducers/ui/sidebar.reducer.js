@@ -6,14 +6,14 @@ import {
 
 
 const initialState = {
-  isActive: true,
+  isVisible: true,
 };
 
 
 // ////////////////////
 // Reducers //////////
 // //////////////////
-const isActive = (state = initialState.isActive, { type }) => {
+const isVisible = (state = initialState.isVisible, { type }) => {
   switch (type) {
     case TOGGLE_SIDEBAR:
       return !state;
@@ -24,7 +24,7 @@ const isActive = (state = initialState.isActive, { type }) => {
 };
 
 export default combineReducers({
-  isActive,
+  isVisible,
 });
 
 

@@ -50,17 +50,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const Sidebar = ({ isActive, toggleSidebar }) => {
+const Sidebar = ({ isVisible, toggleSidebar }) => {
   return (
     <div
       className={css(styles.sidebar)}
       style={{
-        transform: isActive ? 'translateX(0)' : `translateX(${sidebarWidthNumber - 6}px)`,
+        transform: isVisible ? 'translateX(0)' : `translateX(${sidebarWidthNumber - 6}px)`,
       }}
     >
       <SidebarToggleButton
         mergeStyles={styles.toggleButton}
-        isActive={isActive}
+        isVisible={isVisible}
         toggleSidebar={toggleSidebar}
       />
 
@@ -77,13 +77,13 @@ const Sidebar = ({ isActive, toggleSidebar }) => {
 };
 
 Sidebar.propTypes = {
-  isActive: PropTypes.bool.isRequired,
+  isVisible: PropTypes.bool.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
 };
 
 
 const mapStateToProps = state => ({
-  isActive: state.ui.sidebar.isActive,
+  isVisible: state.ui.sidebar.isVisible,
 });
 
 export default connect(mapStateToProps, { toggleSidebar })(Sidebar);

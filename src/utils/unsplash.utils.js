@@ -6,7 +6,7 @@ import photosFixture from '../fixtures/photos.fixture';
 // Unsplash API has a rather unforgiving limit of 100 requests per hour.
 // To avoid hitting that limit in development, we have the option to use
 // a fixture, to stub the requests.
-const useFixtures = true;
+const useFixtures = false;
 
 
 const unsplash = new Unsplash({
@@ -27,12 +27,14 @@ export const login = () => {
   location.assign(authenticationUrl);
 };
 
-export const fetchPhotos = ({ page = 1 } = {}) => {
+export const fetchPhotos = () => {
+  const collectionId = '191435';
+
   if (useFixtures) {
     return new Promise(resolve => resolve(photosFixture));
   }
 
-  return unsplash.photos
-    .searchPhotos('burger', [], page, 6)
+  return unsplash.collections
+    .getCollectionPhotos(collectionId)
     .then(toJson);
 };

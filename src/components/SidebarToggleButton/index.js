@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const SidebarToggleButton = ({ mergeStyles, isActive, toggleSidebar }) => {
+const SidebarToggleButton = ({ mergeStyles, isVisible, toggleSidebar }) => {
   return (
     <button
       className={css(styles.toggleButton, mergeStyles)}
@@ -31,7 +31,7 @@ const SidebarToggleButton = ({ mergeStyles, isActive, toggleSidebar }) => {
         color={grey100}
         size={22}
         style={{
-          transform: isActive ? 'rotateY(180deg)' : 'rotateY(0deg)',
+          transform: isVisible ? 'rotateY(180deg)' : 'rotateY(0deg)',
           transition: 'transform 500ms',
           transitionDelay: '300ms',
           transformOrigin: 'center center',
@@ -44,7 +44,7 @@ const SidebarToggleButton = ({ mergeStyles, isActive, toggleSidebar }) => {
 SidebarToggleButton.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   mergeStyles: PropTypes.object,
-  isActive: PropTypes.bool.isRequired,
+  isVisible: PropTypes.bool.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
 };
 

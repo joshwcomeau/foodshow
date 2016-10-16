@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     position: 'fixed',
     top: 0,
     left: 0,
-    right: sidebarWidth,
     bottom: 0,
     display: 'flex',
     flexDirection: 'column',
@@ -51,7 +50,7 @@ class Slideshow extends Component {
   }
 
   render() {
-    const { photo, progress, isActive } = this.props;
+    const { photo, progress, isActive, isSidebarVisible } = this.props;
 
     // Don't render until our initial photo has been fetched.
     if (!photo) {
@@ -59,7 +58,12 @@ class Slideshow extends Component {
     }
 
     return (
-      <div className={css(styles.slideshow)}>
+      <div
+        className={css(styles.slideshow)}
+        style={{
+          right: isSidebarVisible ? sidebarWidth : 0,
+        }}
+      >
         <ProgressBar {...{ isActive, progress }} />
         <div className={css(styles.photoContainer)}>
           <SlideshowPhoto photo={photo} />
@@ -83,6 +87,7 @@ Slideshow.propTypes = {
   }),
   progress: PropTypes.number.isRequired,
   isActive: PropTypes.bool.isRequired,
+  isSidebarVisible: PropTypes.bool.isRequired,
   fetchPhotosRequest: PropTypes.func.isRequired,
 };
 
@@ -90,6 +95,7 @@ const mapStateToProps = state => ({
   photo: currentPhotoSelector(state),
   progress: state.slideshow.progress,
   isActive: isActiveSelector(state),
+  isSidebarVisible: state.ui.sidebar.isVisible,
 });
 
 export default connect(mapStateToProps, { fetchPhotosRequest })(Slideshow);
