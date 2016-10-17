@@ -15,7 +15,7 @@ const localStorageAuthTokenKey = 'foodshow_auth_token';
 const unsplash = new Unsplash({
   applicationId: '2cc5f79ee1b4d8f8ef036bada6b0e1656239f2d96578addd18bd8f7fee9ff3f0',
   secret: '79adde5db99ee5cf6305639c4e92c117254315234c7ea418f951ca5a1ff18fc3',
-  callbackUrl: window.location.origin,
+  callbackUrl: `${window.location.origin}/foodshow/index.html`,
 });
 
 // TEMP!
