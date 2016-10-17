@@ -14,8 +14,6 @@ function* likePhoto({ photoId }) {
   try {
     const response = yield call(API.likePhoto, { photoId });
 
-    console.log('Like photo result', response);
-
     yield put(likePhotoSuccess({ photoId }));
   } catch (error) {
     yield put(likePhotoFailure({ error }));

@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import { css, StyleSheet } from 'aphrodite';
 
 import { grey100 } from '../../style-variables';
 

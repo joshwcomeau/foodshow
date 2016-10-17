@@ -8,6 +8,7 @@ export const LIKE_PHOTO_SUCCESS = 'LIKE_PHOTO_SUCCESS';
 export const LIKE_PHOTO_FAILURE = 'LIKE_PHOTO_FAILURE';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const PAUSE_SLIDESHOW = 'PAUSE_SLIDESHOW';
 export const RESUME_SLIDESHOW = 'RESUME_SLIDESHOW';
 export const SELECT_PHOTO = 'SELECT_PHOTO';
@@ -65,6 +66,11 @@ export const loginRequest = () => ({
 export const loginSuccess = ({ user }) => ({
   type: LOGIN_SUCCESS,
   user,
+});
+
+export const loginFailure = ({ error }) => ({
+  type: LOGIN_FAILURE,
+  error,
 });
 
 export const pauseSlideshow = () => ({

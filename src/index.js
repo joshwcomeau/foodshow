@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
 import configureStore from './store';
-import { fetchPhotosRequest, loginSuccess } from './actions';
+import { fetchPhotosRequest, loginSuccess, loginFailure } from './actions';
 import { autoLogin } from './utils/unsplash.utils';
 
 import App from './components/App';
@@ -17,11 +17,15 @@ const store = configureStore();
 // or they could have persisted credentials.
 // Deal with auth stuff before anything else.
 autoLogin({
-  callback(user) {
-    console.log('Auto logged in with', user);
+  callback(response) {
+    console.log('Auto logged in with', response);
 
-    if (user) {
-      store.dispatch(loginSuccess({ user }));
+    if (response) {
+      store.dispatch(
+        response.errors
+        ? loginFailure({ error: response.errors[0] })
+        : loginSuccess({ user: response })
+      );
     }
 
     store.dispatch(fetchPhotosRequest());

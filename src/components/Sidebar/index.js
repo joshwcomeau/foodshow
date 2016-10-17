@@ -8,12 +8,13 @@ import {
   grey100,
   grey900,
 } from '../../style-variables';
-import { toggleSidebar, loginRequest } from '../../actions';
+import { toggleSidebar } from '../../actions';
 
 import Divider from '../Divider';
 import Logo from '../Logo';
+import CurrentUserProfile from '../CurrentUserProfile';
 import SidebarToggleButton from '../SidebarToggleButton';
-import Button from '../Button';
+import LoginButton from '../LoginButton';
 
 
 const styles = StyleSheet.create({
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     // fontFamily: 'Trirong',
   },
 
-  logInButton: {
+  mainContent: {
     marginTop: '40px',
   },
 
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Sidebar = ({ isVisible, toggleSidebar, loginRequest }) => {
+const Sidebar = ({ isVisible, isLoggedIn, toggleSidebar }) => {
   return (
     <div
       className={css(styles.sidebar)}
@@ -90,9 +91,9 @@ const Sidebar = ({ isVisible, toggleSidebar, loginRequest }) => {
 
       <Divider />
 
-      <Button mergeStyles={styles.logInButton} onClick={loginRequest}>
-        Log In to Unsplash
-      </Button>
+      <div className={css(styles.mainContent)}>
+        {isLoggedIn ? <CurrentUserProfile /> : <LoginButton />}
+      </div>
 
       <p className={css(styles.unsplashAttribution)}>
         Photos from&nbsp;
@@ -106,16 +107,14 @@ const Sidebar = ({ isVisible, toggleSidebar, loginRequest }) => {
 
 Sidebar.propTypes = {
   isVisible: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
-  loginRequest: PropTypes.func.isRequired,
 };
 
 
 const mapStateToProps = state => ({
   isVisible: state.ui.sidebar.isVisible,
+  isLoggedIn: state.auth.isLoggedIn,
 });
 
-export default connect(
-  mapStateToProps,
-  { toggleSidebar, loginRequest }
-)(Sidebar);
+export default connect(mapStateToProps, { toggleSidebar })(Sidebar);
