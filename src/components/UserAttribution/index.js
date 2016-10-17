@@ -37,7 +37,12 @@ const UserAttribution = ({
       />
       <span>
         By&nbsp;
-        <a href={profileLink} className={css(styles.name)}>
+        <a
+          href={profileLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={css(styles.name)}
+        >
           {name}
         </a>
       </span>
