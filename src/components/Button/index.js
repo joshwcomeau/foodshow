@@ -6,6 +6,7 @@ import { grey100 } from '../../style-variables';
 
 const styles = StyleSheet.create({
   button: {
+    display: 'inline-block',
     border: '1px solid',
     background: 'transparent',
     borderRadius: '4px',
@@ -19,29 +20,36 @@ const styles = StyleSheet.create({
   },
 });
 
-const Button = ({ mergeStyles, children, onClick, color }) => (
-  <button
-    className={css(styles.button, mergeStyles)}
-    onClick={onClick}
-    style={{
-      color,
-      borderColor: color,
-    }}
-  >
-    {children}
-  </button>
+const Button = ({ mergeStyles, children, onClick, href, target, color }) => (
+  React.createElement(
+    !!href ? 'a' : 'button',
+    {
+      className: css(styles.button, mergeStyles),
+      onClick,
+      href,
+      target: !!href && target,
+      style: {
+        color,
+        borderColor: color,
+      },
+    },
+    children
+  )
 );
 
 Button.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   mergeStyles: PropTypes.object,
   children: PropTypes.node,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+  href: PropTypes.string,
+  target: PropTypes.oneOf(['_blank', '_self']),
   color: PropTypes.string.isRequired,
 };
 
 Button.defaultProps = {
   color: grey100,
+  target: '_blank',
 };
 
 

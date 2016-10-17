@@ -10,7 +10,7 @@ import {
 } from '../../actions';
 import { currentPhotographerSelector } from '../../reducers/users.reducer';
 import { isActiveSelector } from '../../reducers/slideshow.reducer';
-import { red } from '../../style-variables';
+import { red, grey100 } from '../../style-variables';
 
 import UserAttribution from '../UserAttribution';
 import IconButton from '../IconButton';
@@ -55,10 +55,13 @@ const styles = StyleSheet.create({
     left: '25px',
   },
 
-  likeButton: {
+  actions: {
     position: 'absolute',
     top: '25px',
     right: '25px',
+  },
+  actionButton: {
+    marginLeft: '5px',
   },
 });
 
@@ -67,11 +70,29 @@ const SlideshowPhoto = ({
   photo,
   user,
   isActive,
+  isLoggedIn,
   pauseSlideshow,
   resumeSlideshow,
   likePhotoRequest,
   unlikePhotoRequest,
 }) => {
+  const likedByUser = photo.liked_by_user;
+
+  const likePhotoButton = isLoggedIn && (
+    <IconButton
+      iconName="favorite"
+      color={likedByUser ? red : grey100}
+      iconColor={likedByUser ? red : grey100}
+      iconSize={16}
+      mergeStyles={styles.actionButton}
+      onClick={() => (
+        likedByUser
+          ? unlikePhotoRequest({ photoId: photo.id })
+          : likePhotoRequest({ photoId: photo.id })
+      )}
+    />
+);
+
   return (
     <div
       className={css(styles.photoContainer, mergeStyles)}
@@ -94,14 +115,15 @@ const SlideshowPhoto = ({
           profileLink={user.links.html}
         />
 
-        <IconButton
-          iconName="favorite"
-          color={red}
-          iconColor={red}
-          iconSize={16}
-          mergeStyles={styles.likeButton}
-          onClick={() => likePhotoRequest({ photoId: photo.id })}
-        />
+        <div className={css(styles.actions)}>
+          {likePhotoButton}
+          <IconButton
+            iconName="link"
+            iconSize={16}
+            mergeStyles={styles.actionButton}
+            href={photo.links.html}
+          />
+        </div>
       </div>
     </div>
   );
@@ -126,6 +148,7 @@ SlideshowPhoto.propTypes = {
     }),
   }),
   isActive: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   pauseSlideshow: PropTypes.func.isRequired,
   resumeSlideshow: PropTypes.func.isRequired,
   likePhotoRequest: PropTypes.func.isRequired,
@@ -135,6 +158,7 @@ SlideshowPhoto.propTypes = {
 const mapStateToProps = state => ({
   user: currentPhotographerSelector(state),
   isActive: isActiveSelector(state),
+  isLoggedIn: state.auth.isLoggedIn,
 });
 
 export default connect(

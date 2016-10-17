@@ -39,6 +39,10 @@ export const likePhoto = ({ photoId }) => {
   return unsplash.photos.likePhoto(photoId).then(toJson);
 };
 
+export const unlikePhoto = ({ photoId }) => {
+  return unsplash.photos.unlikePhoto(photoId).then(toJson);
+};
+
 export const fetchCurrentUser = () => (
   unsplash.currentUser.profile().then(toJson)
 );

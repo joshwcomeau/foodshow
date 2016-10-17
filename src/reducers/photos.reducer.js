@@ -5,7 +5,9 @@ import {
   FETCH_PHOTOS_REQUEST,
   FETCH_PHOTOS_SUCCESS,
   FETCH_PHOTOS_FAILURE,
+  LIKE_PHOTO_SUCCESS,
   SELECT_PHOTO,
+  UNLIKE_PHOTO_SUCCESS,
 } from '../actions';
 
 
@@ -26,6 +28,24 @@ const byId = (state = initialState.byId, { type, ...payload }) => {
       return {
         ...state,
         ...payload.photos,
+      };
+
+    case LIKE_PHOTO_SUCCESS:
+      return {
+        ...state,
+        [payload.photoId]: {
+          ...state[payload.photoId],
+          liked_by_user: true,
+        },
+      };
+
+    case UNLIKE_PHOTO_SUCCESS:
+      return {
+        ...state,
+        [payload.photoId]: {
+          ...state[payload.photoId],
+          liked_by_user: false,
+        },
       };
 
     default:
