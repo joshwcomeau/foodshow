@@ -7,9 +7,6 @@ export const red = '#ff4436';
 export const blue = '#40b2e1';
 export const green = '#8fce35';
 
-export const primaryColour = blue;
-export const secondaryColour = green;
-
 
 export const sidebarWidthNumber = 300;
 export const sidebarWidth = `${sidebarWidthNumber}px`;

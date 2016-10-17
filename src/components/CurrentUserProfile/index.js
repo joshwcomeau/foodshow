@@ -2,10 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 
-import {
-  green,
-} from '../../style-variables';
+import { green } from '../../style-variables';
 import { currentUserSelector } from '../../reducers/auth.reducer';
+
+import ProfilePhoto from '../ProfilePhoto';
 
 
 const styles = StyleSheet.create({
@@ -15,6 +15,11 @@ const styles = StyleSheet.create({
     color: green,
     fontWeight: 'bold',
   },
+  profilePhoto: {
+    display: 'block',
+    width: '64px',
+    margin: '0 auto 15px',
+  },
 });
 
 const CurrentUserProfile = ({ currentUser }) => {
@@ -22,8 +27,15 @@ const CurrentUserProfile = ({ currentUser }) => {
     <div
       className={css(styles.currentUserProfile)}
     >
+      <ProfilePhoto
+        mergeStyles={styles.profilePhoto}
+        profilePhotoUrls={currentUser.profile_image}
+        profileLink={currentUser.links.html}
+        size="medium"
+      />
+
       Logged in as&nbsp;
-      <a href="#" className={css(styles.currentUserLink)}>
+      <a href={currentUser.links.html} className={css(styles.currentUserLink)}>
         {currentUser.name}
       </a>
     </div>

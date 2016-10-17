@@ -75,12 +75,12 @@ export const autoLogin = ({ callback }) => {
   const { code } = getQueryParams();
   const savedToken = localStorage.getItem(localStorageAuthTokenKey);
 
-  if (code) {
+  if (savedToken) {
+    setBearerAndFetchUser({ access_token: savedToken })
+      .then(user => callback(user));
+  } else if (code) {
     authenticateFromCode({ code })
       .then(setBearerAndFetchUser)
-      .then(user => callback(user));
-  } else if (savedToken) {
-    setBearerAndFetchUser({ access_token: savedToken })
       .then(user => callback(user));
   } else {
     // If we can't auto-login, invoke the callback without a specified user.

@@ -88,10 +88,10 @@ const SlideshowPhoto = ({
         style={{ opacity: isActive ? 0 : 1 }}
       >
         <UserAttribution
-          name={user.name}
-          profileImage={user.profile_image.small}
-          href={user.links.html}
           mergeStyles={styles.photographer}
+          name={user.name}
+          profilePhotoUrls={user.profile_image}
+          profileLink={user.links.html}
         />
 
         <IconButton

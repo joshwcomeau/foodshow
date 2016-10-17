@@ -18,8 +18,6 @@ const store = configureStore();
 // Deal with auth stuff before anything else.
 autoLogin({
   callback(response) {
-    console.log('Auto logged in with', response);
-
     if (response) {
       store.dispatch(
         response.errors
