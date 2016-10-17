@@ -62,8 +62,9 @@ export const loginRequest = () => ({
   type: LOGIN_REQUEST,
 });
 
-export const loginSuccess = () => ({
+export const loginSuccess = ({ user }) => ({
   type: LOGIN_SUCCESS,
+  user,
 });
 
 export const pauseSlideshow = () => ({

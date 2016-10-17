@@ -1,12 +1,15 @@
 import Unsplash from 'unsplash-js';
 
 import photosFixture from '../fixtures/photos.fixture';
+import { getQueryParams } from './misc.utils';
 
 // NOTE:
 // Unsplash API has a rather unforgiving limit of 100 requests per hour.
 // To avoid hitting that limit in development, we have the option to use
 // a fixture, to stub the requests.
 const useFixtures = false;
+
+const localStorageAuthTokenKey = 'foodshow_auth_token';
 
 
 const unsplash = new Unsplash({
@@ -19,6 +22,26 @@ const unsplash = new Unsplash({
 window.unsplash = unsplash;
 
 const toJson = response => response.json();
+
+export const fetchPhotos = () => {
+  const collectionId = '191435';
+
+  if (useFixtures) {
+    return new Promise(resolve => resolve(photosFixture));
+  }
+
+  return unsplash.collections
+    .getCollectionPhotos(collectionId)
+    .then(toJson);
+};
+
+export const likePhoto = ({ photoId }) => {
+  return unsplash.photos.likePhoto(photoId).then(toJson);
+};
+
+export const fetchCurrentUser = () => (
+  unsplash.currentUser.profile().then(toJson)
+);
 
 export const login = () => {
   const authenticationUrl = unsplash.auth.getAuthenticationUrl([
@@ -35,23 +58,32 @@ export const authenticateFromCode = ({ code }) => {
     .userAuthentication(code)
     .then(toJson)
     .then(result => {
-      console.log('Result!', result);
-      return unsplash.auth.setBearerToken(result.access_token);
+      // Set it in localstorage, so that we can use it next time
+      localStorage.setItem(localStorageAuthTokenKey, result.access_token);
+
+      return result;
     });
 };
 
-export const fetchPhotos = () => {
-  const collectionId = '191435';
+export const setBearerAndFetchUser = ({ access_token }) => {
+  unsplash.auth.setBearerToken(access_token);
 
-  if (useFixtures) {
-    return new Promise(resolve => resolve(photosFixture));
-  }
-
-  return unsplash.collections
-    .getCollectionPhotos(collectionId)
-    .then(toJson);
+  return fetchCurrentUser();
 };
 
-export const likePhoto = ({ photoId }) => {
-  return unsplash.photos.likePhoto(photoId).then(toJson);
+export const autoLogin = ({ callback }) => {
+  const { code } = getQueryParams();
+  const savedToken = localStorage.getItem(localStorageAuthTokenKey);
+
+  if (code) {
+    authenticateFromCode({ code })
+      .then(setBearerAndFetchUser)
+      .then(user => callback(user));
+  } else if (savedToken) {
+    setBearerAndFetchUser({ access_token: savedToken })
+      .then(user => callback(user));
+  } else {
+    // If we can't auto-login, invoke the callback without a specified user.
+    callback();
+  }
 };

@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 
 import {
   FETCH_PHOTOS_SUCCESS,
+  LOGIN_SUCCESS,
 } from '../actions';
 
 
@@ -21,6 +22,12 @@ const byId = (state = initialState.byId, { type, ...payload }) => {
       return {
         ...state,
         ...payload.users,
+      };
+
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        [payload.user.id]: payload.user,
       };
 
     default:
