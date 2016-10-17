@@ -2,7 +2,12 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { css, StyleSheet } from 'aphrodite';
 
-import { pauseSlideshow, resumeSlideshow } from '../../actions';
+import {
+  pauseSlideshow,
+  resumeSlideshow,
+  likePhotoRequest,
+  unlikePhotoRequest,
+} from '../../actions';
 import { currentPhotographerSelector } from '../../reducers/users.reducer';
 import { isActiveSelector } from '../../reducers/slideshow.reducer';
 import { red } from '../../style-variables';
@@ -64,6 +69,8 @@ const SlideshowPhoto = ({
   isActive,
   pauseSlideshow,
   resumeSlideshow,
+  likePhotoRequest,
+  unlikePhotoRequest,
 }) => {
   return (
     <div
@@ -93,6 +100,7 @@ const SlideshowPhoto = ({
           iconColor={red}
           iconSize={16}
           mergeStyles={styles.likeButton}
+          onClick={() => likePhotoRequest({ photoId: photo.id })}
         />
       </div>
     </div>
@@ -120,6 +128,8 @@ SlideshowPhoto.propTypes = {
   isActive: PropTypes.bool.isRequired,
   pauseSlideshow: PropTypes.func.isRequired,
   resumeSlideshow: PropTypes.func.isRequired,
+  likePhotoRequest: PropTypes.func.isRequired,
+  unlikePhotoRequest: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -129,5 +139,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { pauseSlideshow, resumeSlideshow }
+  { pauseSlideshow, resumeSlideshow, likePhotoRequest, unlikePhotoRequest }
 )(SlideshowPhoto);

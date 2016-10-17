@@ -51,3 +51,7 @@ export const fetchPhotos = () => {
     .getCollectionPhotos(collectionId)
     .then(toJson);
 };
+
+export const likePhoto = ({ photoId }) => {
+  return unsplash.photos.likePhoto(photoId).then(toJson);
+};

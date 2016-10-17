@@ -25,6 +25,8 @@ if (code) {
       // liked them.
       store.dispatch(fetchPhotosRequest());
     });
+} else {
+  store.dispatch(fetchPhotosRequest());
 }
 
 render((

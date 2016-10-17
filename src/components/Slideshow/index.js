@@ -44,11 +44,6 @@ const styles = StyleSheet.create({
 });
 
 class Slideshow extends Component {
-  componentDidMount() {
-    // Fetch info for all the items in our slideshow, right away.
-    this.props.fetchPhotosRequest();
-  }
-
   render() {
     const { photo, progress, isActive, isSidebarVisible } = this.props;
 

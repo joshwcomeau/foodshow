@@ -23,6 +23,10 @@ const initialState = {
 const byId = (state = initialState.byId, { type, ...payload }) => {
   switch (type) {
     case FETCH_PHOTOS_SUCCESS:
+      console.log('Success', state);
+      Object.keys(payload.photos).forEach(id => {
+        console.log('liked!', id, payload.photos[id].liked_by_user);
+      });
       return {
         ...state,
         ...payload.photos,
