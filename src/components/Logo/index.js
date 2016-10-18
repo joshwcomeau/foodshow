@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { css, StyleSheet } from 'aphrodite';
 
 import { blue } from '../../style-variables';
@@ -19,7 +18,7 @@ const styles = StyleSheet.create({
     display: 'block',
     position: 'relative',
     color: '#FFF',
-    cursor: 'pointer',
+    cursor: 'default',
     textDecoration: 'none',
 
     ':hover [class*=rectangleContainer]': {
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
 
 const Logo = () => {
   return (
-    <Link to="/" className={css(styles.logoContainer)}>
+    <div className={css(styles.logoContainer)}>
       <img
         src={hamburgerIcon}
         role="presentation"
@@ -86,7 +85,7 @@ const Logo = () => {
           <div className={css(styles.rectangle)} />
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
